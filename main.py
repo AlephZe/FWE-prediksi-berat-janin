@@ -129,20 +129,7 @@ def next_screen():
 
     head_volume = calculate_head_volume(head_diameter_cm)
     total = ((feet_volume + upper_feet_volume) * 2) + (hand_volume * 2) +  body_volume + head_volume
-    print ("Total Volume:", total)
-    # l;ength and height
-    print ("Feet Length:", feet_x2)
-    print ("feet Height1:", feet_y1)
-    print ("feet Height2:", feet_y2)
-    
-    print ("Feet Volume:", feet_volume)
 
-    # body length and height
-    print ("Body Length:", body_x2)
-    print ("Body Height1:", body_y1)
-    print ("Body Height2:", body_y2)
-
-    print ("Body Volume:", body_volume)
     # hide choose image button
     open_button.pack_forget()
     description.pack_forget()
@@ -216,19 +203,24 @@ def reset_globals():
     body_coordinates = []
     head_diameter = []
 
-# Create a Tkinter window
-root = tk.Tk()
-root.title("Image Measurement Tool")
-# windoww settings
-root.geometry("300x300")
-root.eval('tk::PlaceWindow . center')
+# main program
+def main():
+    # Create a Tkinter window
+    root = tk.Tk()
+    root.title("Image Measurement Tool")
+    # windoww settings
+    root.geometry("300x300")
+    root.eval('tk::PlaceWindow . center')
 
-# add program description
-description = tk.Label(root, text="This program allows you to measure distances \n in an image in physical units.")
-description.pack()
+    # add program description
+    description = tk.Label(root, text="This program allows you to measure weight \n of a fetal in KG.")
+    description.pack()
 
-# Add a button to open the file dialog
-open_button = tk.Button(root, text="Choose Image", command=open_image)
-open_button.pack()
+    # Add a button to open the file dialog
+    open_button = tk.Button(root, text="Choose Image", command=open_image)
+    open_button.pack()
 
-root.mainloop()
+    root.mainloop()
+
+if __name__ == '__main__':
+    main()
