@@ -133,8 +133,8 @@ def next_screen():
     total = ((feet_volume + upper_feet_volume) * 2) + (hand_volume * 2) +  body_volume + head_volume
 
     # hide choose image button
-    # open_button.pack_forget()
-    # description.pack_forget()
+    open_button.pack_forget()
+    description.pack_forget()
     # create text
     # show results estimated weight in kg, covert to to kg from g
     text = f"Estimated Weight: {total * 0.001:.2f} kg\nFeet Volume: {feet_volume * 0.001:.2f} kg\nBody Volume: {body_volume * 0.001:.2f} kg\nHead Volume: {head_volume * 0.001:.2f} kg\nHand Volume: {hand_volume * 0.001:.2f} kg"
