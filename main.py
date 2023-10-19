@@ -171,7 +171,7 @@ def next_screen():
     description.pack_forget()
     # create text
     # show results estimated weight in kg, covert to to kg from g
-    text = f"Estimated Weight: {total * 0.001:.2f} kg\nFeet Volume: {feet_volume * 0.001:.2f} kg\nBody Volume: {body_volume * 0.001:.2f} kg\nHead Volume: {head_volume * 0.001:.2f} kg\nHand Volume: {hand_volume * 0.001:.2f} kg"
+    text = f"Estimated Weight: {total * 0.001:.2f} kg\nFeet Weight: {feet_volume * 0.001:.2f} kg\nBody Weight: {body_volume * 0.001:.2f} kg\nHead Weight: {head_volume * 0.001:.2f} kg\nHand Weight: {hand_volume * 0.001:.2f} kg"
 
     # add text to tkinter window
     label = tk.Label(root, text=text)
