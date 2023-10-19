@@ -24,7 +24,7 @@ def draw_lines_and_distances(image, points, color=(0, 255, 0)):
             int((points[i - 1][0] + points[i][0]) / 2),
             int((points[i - 1][1] + points[i][1]) / 2)
         )
-        cv2.putText(image, f'{distance:.2f} cm', text_position, cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
+        # cv2.putText(image, f'{distance:.2f} cm', text_position, cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
 
 # Function to handle mouse clicks
 def mark_point(event, x, y, flags, param):
@@ -77,7 +77,7 @@ def mark_point(event, x, y, flags, param):
                 draw_lines_and_distances(marked_image, head_diameter)
 
         # If both sets of points are obtained, proceed to the next screen
-        if len(bottom_feet_coordinates) == 4 and len(upper_feet_coordinates) == 4 and len(body_coordinates) == 4 and len(hand_coordinates) == 4 and len(head_diameter) == 2:
+        if len(bottom_feet_coordinates) == 4 and len(upper_feet_coordinates) == 4 and len(body_coordinates) == 4 and len(hand_coordinates) == 4 and len(head_diameter) == 3:
             cv2.destroyAllWindows()
             next_screen()  # You can define the next screen function here
 
@@ -104,22 +104,43 @@ def next_screen():
     feet_x2 = calculate_distance(bottom_feet_coordinates[0], bottom_feet_coordinates[1])
     feet_y1 = calculate_distance(bottom_feet_coordinates[0], bottom_feet_coordinates[3]) 
     feet_y2 = calculate_distance(bottom_feet_coordinates[1], bottom_feet_coordinates[2]) 
+
+    # print button feet coordinates
+    print("x2 bottom feet", feet_x2)
+    print("y1 bottom feet", feet_y1)
+    print("y2 bottom feet", feet_y2)
     
     # upper feet
     upper_feet_x2 = calculate_distance(upper_feet_coordinates[0], upper_feet_coordinates[1])
     upper_feet_y1 = calculate_distance(upper_feet_coordinates[0], upper_feet_coordinates[3])
     upper_feet_y2 = calculate_distance(upper_feet_coordinates[1], upper_feet_coordinates[2])
+
+    # print upper feet coordinates
+    print("x2 upper feet", upper_feet_x2)
+    print("y1 upper feet", upper_feet_y1)
+    print("y2 upper feet", upper_feet_y2)
     
     #hand 
     hand_x2 = calculate_distance(hand_coordinates[0], hand_coordinates[1])
     hand_y1 = calculate_distance(hand_coordinates[0], hand_coordinates[3])
     hand_y2 = calculate_distance(hand_coordinates[1], hand_coordinates[2])
+
+    # print hand coordinates
+    print("x2 hand", hand_x2)
+    print("y1 hand", hand_y1)
+    print("y2 hand", hand_y2)
     
     # body
     body_x2 = calculate_distance(body_coordinates[0], body_coordinates[1])
     body_y1 = calculate_distance(body_coordinates[0], body_coordinates[3])
     body_y2 = calculate_distance(body_coordinates[1], body_coordinates[2])
     head_diameter_cm = calculate_distance(head_diameter[0], head_diameter[1])
+
+    # print body coordinates
+    print("x2 body", body_x2)
+    print("y1 body", body_y1)
+    print("y2 body", body_y2)
+    print("head diameter", head_diameter_cm)
 
     feet_volume = calculate_integrate_volume([0, feet_x2, feet_y1, feet_y2])
 
@@ -129,9 +150,22 @@ def next_screen():
 
     body_volume = calculate_integrate_volume([0, body_x2, (body_y1), body_y2])
 
+    # print each volume
+    print("feet volume", feet_volume)
+    print("upper feet volume", upper_feet_volume)
+    print("hand volume", hand_volume)
+    print("body volume", body_volume)
+    
+
     head_volume = calculate_head_volume(head_diameter_cm)
+
+    # print head volume
+    print("head volume", head_volume)
     total = ((feet_volume + upper_feet_volume) * 2) + (hand_volume * 2) +  body_volume + head_volume
 
+    # print total volume
+    print("total volume", total)
+    
     # hide choose image button
     open_button.pack_forget()
     description.pack_forget()
@@ -198,10 +232,11 @@ def open_image():
         process_image(file_path)
 
 def reset_globals():
-    global image, marked_image, bottom_feet_coordinates, body_coordinates, head_diameter, upper_feet_coordinates
+    global image, marked_image, bottom_feet_coordinates, body_coordinates, head_diameter, upper_feet_coordinates, hand_coordinates
     image = None
     bottom_feet_coordinates = []
     upper_feet_coordinates = []
+    hand_coordinates = []
     body_coordinates = []
     head_diameter = []
 

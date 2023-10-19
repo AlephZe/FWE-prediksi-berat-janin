@@ -1,5 +1,4 @@
 from scipy import integrate
-from scipy.integrate import tplquad
 import numpy as np
 import math
 
@@ -28,19 +27,14 @@ def calculate_distance(point1, point2):
     return distance
 
 def calculate_head_volume(diameter):
-    r = diameter / 2
-    # Batas integral
+    R = diameter / 2  # Inisialisasi nilai R dengan diameter / 2
     r_lower = 0
-    r_upper = r
-    phi_lower = 0
-    phi_upper = np.pi
-    theta_lower = 0
-    theta_upper = 2 * np.pi
+    r_upper = R  # Ganti r dengan R
 
-    # Fungsi yang mengembalikan 1 (konstanta) karena kita menghitung volume kepala / asumssi mirip bola
-    def volume_integral(r, phi, theta):
-        return 1
+    def integrand(r, R):
+        return np.pi * (R**2 - r**2)
 
-    # Hitung integral menggunakan scipy.integrate.tplquad
-    volume, _ = tplquad(volume_integral, r_lower, r_upper, phi_lower, phi_upper, theta_lower, theta_upper)
-    return volume
+    # Hitung integral menggunakan scipy.integrate.quad
+    result, _ = integrate.quad(integrand, r_lower, r_upper, args=(R))
+    volume_kepala = result * 2
+    return volume_kepala
