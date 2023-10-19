@@ -77,7 +77,7 @@ def mark_point(event, x, y, flags, param):
                 draw_lines_and_distances(marked_image, head_diameter)
 
         # If both sets of points are obtained, proceed to the next screen
-        if len(bottom_feet_coordinates) == 4 and len(upper_feet_coordinates) == 4 and len(body_coordinates) == 4 and len(hand_coordinates) == 4 and len(head_diameter) == 3:
+        if len(bottom_feet_coordinates) == 4 and len(upper_feet_coordinates) == 4 and len(body_coordinates) == 4 and len(hand_coordinates) == 4 and len(head_diameter) == 2:
             cv2.destroyAllWindows()
             next_screen()  # You can define the next screen function here
 
