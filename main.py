@@ -243,7 +243,7 @@ def reset_globals():
 
 
 if __name__ == '__main__':
-    root.title("Image Measurement Tool")
+    root.title("Fetal Weight Estimation")
     # windoww settings
     root.geometry("300x300")
     root.eval('tk::PlaceWindow . center')
